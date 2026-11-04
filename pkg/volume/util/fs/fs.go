@@ -1,4 +1,4 @@
-//go:build linux || darwin
+//go:build linux || darwin || aix
 
 /*
 Copyright 2014 The Kubernetes Authors.
