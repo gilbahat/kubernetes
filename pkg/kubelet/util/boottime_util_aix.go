@@ -19,16 +19,13 @@ limitations under the License.
 package util
 
 import (
-	"fmt"
 	"time"
+
+	"k8s.io/kubernetes/pkg/kubelet/aixstats"
 )
 
-// GetBootTime is not implemented on AIX yet. Callers tolerate the error:
-// the stats summary reports a zero node start time and the startup latency
-// tracker skips the boot-to-kubelet interval.
-//
-// TODO(aix): read the boot time from the BOOT_TIME record in /etc/utmp or
-// from libperfstat once it can be verified on AIX hardware.
+// GetBootTime returns the time at which the machine was started, to the
+// minute, from the boot record that `who -b` reads from /etc/utmp.
 func GetBootTime() (time.Time, error) {
-	return time.Time{}, fmt.Errorf("GetBootTime is not yet implemented on AIX")
+	return aixstats.BootTime()
 }
